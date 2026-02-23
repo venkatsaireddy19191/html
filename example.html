@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display:flex;
+            height:100vh;
+            justify-content:center;
+            align-items:center;
+        }
+        .box{
+        background-color: blue;
+        height: 100px;
+        width: 100px;
+       /* transition-property:width ; */
+       /* transition-duration: 3s; */
+       /* transition-timing-function:ease-in; */
+       /* transition-delay:10s; */
+      transition:transform 2s;
+       }
+    .box:hover{
+       background-color: aquamarine;
+       transform:scale(2) rotate(360deg)
+    }
+    </style>
+</head>
+<body>
+    <div class="box">HAVI</div>
+</body>
+</html>
+
+
+
+
+ 

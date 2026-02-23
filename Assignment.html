@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Profile Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color:pink;
+    }
+    form {
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+    .card { 
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin: 10px;
+      animation: fadeIn 0.5s ease-in-out;
+      position: relative;
+    }
+    .card.dark {
+      background-color: #333;
+      color: #fff;
+    }
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+    .square { border-radius: 0; }
+    .rounded { border-radius: 12px; }
+    .circle { border-radius: 50%; }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    button { margin-top: 10px; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h2>Dynamic Profile Card Generator</h2>
+  <form id="profileForm">
+    <input type="text" id="name" placeholder="Name" required><br>
+    <textarea id="bio" placeholder="Short Bio" required></textarea><br>
+    <input type="file" id="image" accept="image/*" required><br>
+    <select id="borderStyle">
+      <option value="square">Square</option>
+      <option value="rounded">Rounded</option>
+      <option value="circle">Circle</option>
+    </select><br>
+    <button type="button" onclick="generateCard()">Generate Card</button>
+  </form>
+
+  <div class="card-container" id="cardContainer"></div>
+
+  <script>
+    let editingIndex = null;
+
+    function generateCard() {
+      const name = document.getElementById('name').value;
+      const bio = document.getElementById('bio').value;
+      const file = document.getElementById('image').files[0];
+      const borderStyle = document.getElementById('borderStyle').value;
+
+      if (!name || !bio || (!file && editingIndex === null)) return;
+
+      const reader = new FileReader();
+      reader.onloadend = function () {
+        const image = file ? reader.result : getCards()[editingIndex].image;
+        const newCard = { name, bio, image, borderStyle, dark: false };
+
+        const cards = getCards();
+        if (editingIndex !== null) {
+          cards[editingIndex] = newCard;
+          editingIndex = null;
+        } else {
+          cards.push(newCard);
+        }
+        localStorage.setItem('cards', JSON.stringify(cards));
+        renderCards();
+        document.getElementById('profileForm').reset();
+      };
+      if (file) reader.readAsDataURL(file);
+      else reader.onloadend();
+    }
+
+    function getCards() {
+      return JSON.parse(localStorage.getItem('cards')) || [];
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cardContainer');
+      container.innerHTML = '';
+      getCards().forEach((card, index) => {
+        const div = document.createElement('div');
+        div.className = card ${card.dark ? 'dark' : ''};
+        div.innerHTML = `
+          <img src="${card.image}" class="profile-img ${card.borderStyle}"><br>
+          <strong>${card.name}</strong><br>
+          <p>${card.bio}</p>
+          <button onclick="deleteCard(${index})">Delete</button>
+          <button onclick="editCard(${index})">Edit</button>
+          <button onclick="toggleTheme(${index})">Toggle Theme</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function deleteCard(index) {
+      const cards = getCards();
+      cards.splice(index, 1);
+      localStorage.setItem('cards', JSON.stringify(cards));
+      renderCards();
+    }
+
+    function editCard(index) {
+      const card = getCards()[index];
+      document.getElementById('name').value = card.name;
+      document.getElementById('bio').value = card.bio;
+      document.getElementById('borderStyle').value = card.borderStyle;
+      editingIndex = index;
+    }
+
+    function toggleTheme(index) {
+      const cards = getCards();
+      cards[index].dark = !cards[index].dark;
+      localStorage.setItem('cards', JSON.stringify(cards));
+      renderCards();
+    }
+
+    window.onload = renderCards;
+  </script>
+</body>
+</html>

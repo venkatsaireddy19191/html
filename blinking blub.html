@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blinking Bulb</title>
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: first baseline;
+      align-items:flex-start;
+      height: 100vh;/viewport height-vh/
+    }
+    
+    .thread {
+      display: flex;
+ gap: 20px;          
+     
+    }
+
+    .bulb {
+      width: 40px;
+      height: 40px;
+      background-color: rgb(255, 25, 0);
+      border-radius: 50%;
+      box-shadow: 0 0 10px yellow;
+      animation: blink 1.5s infinite ease-in-out;
+    }
+
+    /* Add delays for each bulb */
+    .bulb-1 { animation-delay: 0s; }
+    .bulb:nth-child(2) { animation-delay: 0.2s; }
+    .bulb:nth-child(3) { animation-delay: 0.3s; }
+    .bulb:nth-child(4) { animation-delay: 0.4s; }
+    .bulb:nth-child(5) { animation-delay: 0.5s; }
+    .bulb:nth-child(6) { animation-delay: 0.6s; }
+    .bulb:nth-child(7) { animation-delay: 0.7s; }
+
+
+    @keyframes blink {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 0 15px yellow;
+      }
+      50% {
+        opacity: 0.3;
+        transform: scale(0.6);
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thread"><!--here div class="thread" then it comes in vertical direction-->
+    <div class="bulb bulb-1"></div> 
+    <div class="bulb bulb-2"></div>
+    <div class="bulb bulb-3"></div>
+    <div class="bulb bulb-4"></div>
+    <div class="bulb bulb-5"></div>
+    <div class="bulb bulb-6"></div>
+    <div class="bulb bulb-7"></div>
+  </div>
+</body>
+</html>
+</body>
+</html>

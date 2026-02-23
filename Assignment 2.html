@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynamic Profile Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input, textarea, select, button {
+      padding: 10px;
+      font-size: 1em;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    #cardContainer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      width: 280px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      animation: fadeInScale 0.4s ease forwards;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    @keyframes fadeInScale {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .img-square { border-radius: 0; }
+    .img-rounded { border-radius: 15px; }
+    .img-circle  { border-radius: 50%; }
+
+    .card.light { background: #ffffff; color: #222222; }
+    .card.dark { background: #222222; color: #f5f5f5; }
+
+    .card button {
+      margin: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form id="profileForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <textarea id="bio" placeholder="Short Bio" required></textarea>
+      <input type="file" id="imageUpload" accept="image/*" required />
+      <select id="borderStyle">
+        <option value="square">Square</option>
+        <option value="rounded">Rounded</option>
+        <option value="circle">Circle</option>
+      </select>
+      <div class="buttons">
+        <button type="button" id="previewBtn">Preview</button>
+        <button type="submit">Generate Card</button>
+      </div>
+    </form>
+    <div id="cardContainer"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('profileForm');
+    const container = document.getElementById('cardContainer');
+    const previewBtn = document.getElementById('previewBtn');
+    let cards = JSON.parse(localStorage.getItem('cards')) || [];
+
+    function renderCards() {
+      container.innerHTML = '';
+      cards.forEach((card, index) => {
+        const cardDiv = document.createElement('div');
+        cardDiv.className = card ${card.theme};
+
+        cardDiv.innerHTML = `
+          <img src="${card.image}" class="img-${card.border}" />
+          <h3>${card.name}</h3>
+          <p>${card.bio}</p>
+          <button class="theme-toggle">Toggle Theme</button>
+          <button class="edit">Edit</button>
+          <button class="delete">Delete</button>
+        `;
+
+        cardDiv.querySelector('.theme-toggle').onclick = () => {
+          cards[index].theme = cards[index].theme === 'light' ? 'dark' : 'light';
+          saveAndRender();
+        };
+
+        cardDiv.querySelector('.delete').onclick = () => {
+          cards.splice(index, 1);
+          saveAndRender();
+        };
+
+        cardDiv.querySelector('.edit').onclick = () => {
+          const card = cards[index];
+          document.getElementById('name').value = card.name;
+          document.getElementById('bio').value = card.bio;
+          document.getElementById('borderStyle').value = card.border;
+          cards.splice(index, 1);
+          saveAndRender();
+        };
+
+        container.appendChild(cardDiv);
+      });
+    }
+
+    function saveAndRender() {
+      localStorage.setItem('cards', JSON.stringify(cards));
+      renderCards();
+    }
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const bio = document.getElementById('bio').value;
+      const border = document.getElementById('borderStyle').value;
+      const file = document.getElementById('imageUpload').files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        cards.push({ name, bio, image: reader.result, border, theme: 'light' });
+        form.reset();
+        saveAndRender();
+      };
+      reader.readAsDataURL(file);
+    };
+
+    previewBtn.onclick = () => {
+      const name = document.getElementById('name').value;
+      const bio = document.getElementById('bio').value;
+      const border = document.getElementById('borderStyle').value;
+      const file = document.getElementById('imageUpload').files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const tempCard = { name, bio, image: reader.result, border, theme: 'light' };
+        cards.push(tempCard);
+        renderCards();
+        setTimeout(() => {
+          cards.pop(); // Remove preview after short delay
+          renderCards();
+        }, 2000);
+      };
+      reader.readAsDataURL(file);
+    };
+
+    window.onload = renderCards;
+    </script>
+</body>
+</html>

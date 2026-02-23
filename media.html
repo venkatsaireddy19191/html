@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display:grid;
+            height: 100vh;
+            grid-template-areas: "nav nav nav nav"
+                                 "article article content content"
+                                 "footer footer footer footer"
+        }
+        .item1{
+            background-color: yellow;
+            grid-area: nav;
+        }  
+        ..item2{
+            background-color: red;
+            grid-area:article;
+        }  
+        .item3{
+            background-color: blue;
+            grid-area: content;
+        }  
+        .item4{
+            background-color: green;
+            grid-area: footer;
+        }  
+        @media screen and (max-width:600px){
+            .container{
+                grid-template-areas:
+                "nav"
+                "article"
+                "content"
+                "footer"
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="conatiner">
+    <div class="item1">Navigation</div>
+    <div class="item1">article</div>
+    <div class="item1">content</div>
+    <div class="item1">Footer</div>
+</div>
+</body>
+</html>

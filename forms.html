@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Forms Example</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body{
+                background-color:yellow;
+            }
+            form{
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+    <form action = "" method="post">
+    <FIELDSET>
+        <legend>Login Form</legend>
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+        <br><br>
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <br><br>
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <br><br>
+        <label>Gender:</label>
+        <input type="radio" name="Gender" value="Male" required/>Male
+        <input type="radio" name="Gender" value="Female"/>Female
+        <br><br>
+        <label>Date:</label>
+        <input type="date" name="date" required>
+        <br><br>
+        <label>course:</label>
+        <select name="course" required>
+            <option value="BCA">B TECH</option>
+            <option value="BBA">BBA</option>
+            <option value="BSc">BSc</option>
+            <option value="MCA">MCA</option>
+        </select>
+        <br><br>
+        <label>Address</label>
+        <textarea name="address" rows="5" cols="50" placeholder="Enter your address" required></textarea>
+        <br><br>
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+        <br><br>
+        <label>Files upload:</label>
+        <input type="file" name="file" accept=".jpg, .jpeg, .png, .pdf" required>
+        <br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+
+        </FIELDSET>
+
+</form>
+
+
+ <h1>Table-3</h1>
+    <fieldset style="color: rgb(184, 106, 145);">
+        <h3>Basic informstion</h3>
+        <from>
+            <table>
+            <tr>
+                <th><label>First Name:</label></th>
+                <th><input type="text" name="user name" placeholder="Enter your name"></th>
+            </tr>
+            <tr>
+                <th><label>password:</label></th>
+                <th><input type="text" name="password" placeholder="Enter your password"></th>
+            </tr>
+            <tr>
+                <th><label>retype:</label></th>
+                <th><input type="text" name="retype" placeholder="Enter your retype"></th>
+            </tr>
+             <tr>
+                <th><label>First Name:</label></th>
+                <th><input type="text" name="user name" placeholder="Enter your name"></th>
+            </tr>
+            <tr>
+                <th><label>Surname:</label></th>
+                <th><input type="text" name="surname" placeholder="Enter your sur name"></th>
+            </tr>
+            <tr>
+                <th><label>phone no:</label></th>
+                <th><input type="text" name="phone no" placeholder="999-999-9999"></th>
+            </tr>
+                <th><label>Address:</label></th>
+                <th><textarea name="address" rows="5" cols="50" placeholder="Enter your address" required></textarea></th>
+            </tr>
+            <tr>
+                <th><label>City:</label></th>
+                <th><input type="text" name = "city" placeholder="Enter your city"></th> </th>
+            </tr>
+            <br><br>
+            <tr>
+                <th><label>province:</label></th>
+                <th>
+                    <select 
+                </th>
+            </tr>
+        </from>
+    </fieldset>
+    </body>
+</html>

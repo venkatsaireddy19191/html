@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    form {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      width: 300px;
+      margin-bottom: 30px;
+    }
+    input[type="text"], textarea, select {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 8px;
+      background: #ddd;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    button:hover {
+      background: #ccc;
+    }
+    
+    .button-row {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .card.dark {
+      background-color: #1f2937;
+      color: white;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .btn-toggle {
+      background-color: #0d9488;
+    }
+
+    .btn-toggle:hover {
+      background-color: #0f766e;
+    }
+
+    .btn-delete {
+      background-color: #dc2626;
+    }
+
+    .btn-delete:hover {
+      background-color: #b91c1c;
+    }
+
+    .subtitle {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="cardForm">
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <textarea id="bio" placeholder="Enter a short bio"></textarea>
+    <input type="file" id="imageInput" accept="image/*" />
+    <select id="shape">
+      <option value="square">Square</option>
+      <option value="round">Round</option>
+    </select>
+    <button type="submit">Generate Card</button>
+  </form>
+
+  <div id="cardsContainer"></div>
+
+  <script>
+    const form = document.getElementById('cardForm');
+    const cardsContainer = document.getElementById('cardsContainer');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const bio = document.getElementById('bio').value.trim();
+      const shape = document.getElementById('shape').value;
+      const fileInput = document.getElementById('imageInput');
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+  </script>
+    <div class="card">
+    <p class="subtitle">🔰Profile</p>
+    <div class="title">sai</div>
+    <div>sai</div>
+    <div class="buttons">
+      <button class="btn btn-toggle" onclick="toggleTheme(this)">Toggle Theme</button>
+      <button class="btn btn-delete" onclick="deleteCard(this)">Delete</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="subtitle">🔰Profile</p>
+    <div class="title">excelr</div>
+    <div>Excelr</div>
+    <div class="buttons">
+      <button class="btn btn-toggle" onclick="toggleTheme(this)">Toggle Theme</button>
+      <button class="btn btn-delete" onclick="deleteCard(this)">Delete</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="subtitle">🔰Profile</p>
+    <div class="title">noblen</div>
+    <div>MRu</div>
+    <div>MRU</div>
+    <div class="buttons">
+      <button class="btn btn-toggle" onclick="toggleTheme(this)">Toggle Theme</button>
+      <button class="btn btn-delete" onclick="deleteCard(this)">Delete</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme(button) {
+      const card = button.closest('.card');
+      card.classList.toggle('dark');
+    }
+
+    function deleteCard(button) {
+      const card = button.closest('.card');
+      card.remove();
+    }
+  </script>
+</body>
+</html>

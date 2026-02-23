@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Bar</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            height:10vh;
+            padding:10px;
+            background-color: pink;
+        }
+    .logo{
+        font-size: 2rem;
+            font-weight: bold;
+            color: #1b1a18;
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        li{
+            color: black;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        li:hover{
+            text-decoration: underline;
+            color: #d3be1a;
+
+    }
+.content{
+        grid-template-columns: 100px 150px 100px;
+            grid-template-rows: 100px 150px 100px;
+            gap:20px
+            border: 2px solid hsl(0, 0%, 0%);
+    }
+    </style>
+</head>
+<body>
+    <nav class="container">
+        <div class="logo">Flexbox</div>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+    <div class="content">
+
+    </div>
+
+</body>
+</html>

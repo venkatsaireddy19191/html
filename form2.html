@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Forms Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Login Form</legend>
+           <table> 
+            <tr>
+            <td><label>Username:</label></td>
+            <td><input type="text" name="username" placeholder="Enter your username" required></td>
+            </tr>
+
+            <tr>
+            <td><label>Password:</label></td>
+            <td><input type="password" name="password" placeholder="Enter your password" required></td>
+            </tr>
+       
+
+            <tr>
+            <td><label>Email:</label></td>
+            <td><input type="email" name="email" placeholder="Enter your email" required></td>
+            </tr>
+         
+
+            <tr>
+            <td style="vertical-align:top;"><label>How many pieces of fruits<br> per day:</label></td>
+            <td>
+            <input type="radio" name="fruits" value="1" required>1<br>
+            <input type="radio" name="fruits" value="2">2<br>
+            <input type="radio" name="fruits" value="3">More than 2
+            </td>
+            </tr>
+           
+
+            <tr>
+            <td ><label>my favorite fruit:</label></td>
+            <td>
+            <select multiple name="favorite_fruit" required>
+                <option value="apple">Apple</option>
+                <option value="banana">Banana</option>
+                <option value="orange">Orange</option>
+                <option value="grape">Grape</option>
+                <option value="mango">Mango</option>
+                <option value="kiwi">Kiwi</option>
+                <option value="strawberry">Strawberry</option>
+                <option value="watermelon">Watermelon</option>
+            
+            </select>
+
+            </td>
+            </tr>
+            <tr>
+                <td><label>would you like broucher??</label></td>
+                <td>
+                    <input type="checkbox" name="broucher" value="yes">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="submit">Submit</button></td>
+            </tr>
+        </table>
+        </fieldset>
+    </form>  
+        </body>
+
+        
+</html>
